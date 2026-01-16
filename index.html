@@ -21,6 +21,7 @@
             --success: #22c55e;
             --warning: #f59e0b;
             --danger: #ef4444;
+            --info: #3b82f6;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
@@ -293,20 +294,13 @@
         }
         
         .card-image {
-            height: 140px;
+            height: 120px;
             background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
+            font-size: 3rem;
             position: relative;
-            overflow: hidden;
-        }
-        
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
         
         .card-header {
@@ -503,6 +497,42 @@
             gap: 1rem;
         }
         
+        /* Action Banner for QR Scans */
+        .action-banner {
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .action-banner.checkout {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 2px solid #3b82f6;
+        }
+        
+        .action-banner.return {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border: 2px solid #22c55e;
+        }
+        
+        .action-banner-icon {
+            font-size: 2.5rem;
+        }
+        
+        .action-banner-text h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.25rem;
+        }
+        
+        .action-banner-text p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+        
         .qr-container {
             text-align: center;
             padding: 1.25rem;
@@ -559,6 +589,24 @@
             background: var(--gray-200);
         }
         
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #16a34a;
+        }
+        
+        .btn-info {
+            background: var(--info);
+            color: white;
+        }
+        
+        .btn-info:hover {
+            background: #2563eb;
+        }
+        
         .btn-warning {
             background: var(--warning);
             color: white;
@@ -571,6 +619,11 @@
         .btn-danger {
             background: var(--danger);
             color: white;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         
         /* Forms */
@@ -627,11 +680,6 @@
             outline: none;
             border-color: var(--baylor-green);
             box-shadow: 0 0 0 3px rgba(21,71,52,0.1);
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
         }
         
         .form-row {
@@ -755,7 +803,7 @@
             color: var(--gray-600);
         }
         
-        /* QR Print Grid */
+        /* QR Print Grid - Dual QR System */
         .print-header {
             background: white;
             padding: 1.25rem;
@@ -774,38 +822,110 @@
             color: var(--gray-800);
         }
         
-        .qr-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1rem;
+        .print-instructions {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
         }
         
-        .qr-card {
+        .print-instructions h3 {
+            font-size: 0.95rem;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .print-instructions p {
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            line-height: 1.6;
+        }
+        
+        .qr-print-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+        
+        .qr-print-card {
             background: white;
             border: 2px solid var(--gray-200);
-            border-radius: 10px;
-            padding: 1rem;
-            text-align: center;
+            border-radius: 12px;
+            overflow: hidden;
         }
         
-        .qr-card h4 {
-            font-size: 0.85rem;
-            margin-top: 0.75rem;
+        .qr-print-card-header {
+            background: var(--gray-100);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .qr-print-card-header h4 {
+            font-size: 0.95rem;
             color: var(--baylor-green);
-            font-weight: 600;
+            margin-bottom: 0.125rem;
         }
         
-        .qr-card .qr-id {
-            font-size: 0.7rem;
+        .qr-print-card-header p {
+            font-size: 0.75rem;
             color: var(--gray-500);
             font-family: monospace;
-            margin-top: 0.25rem;
         }
         
-        .qr-card .qr-location {
+        .qr-print-card-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .qr-print-item {
+            padding: 1rem;
+            text-align: center;
+            border-right: 1px dashed var(--gray-200);
+        }
+        
+        .qr-print-item:last-child {
+            border-right: none;
+        }
+        
+        .qr-print-item.item-qr {
+            background: #eff6ff;
+        }
+        
+        .qr-print-item.location-qr {
+            background: #f0fdf4;
+        }
+        
+        .qr-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .qr-label.item {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .qr-label.location {
+            background: #22c55e;
+            color: white;
+        }
+        
+        .qr-print-hint {
             font-size: 0.65rem;
-            color: var(--gray-400);
-            margin-top: 0.25rem;
+            color: var(--gray-500);
+            margin-top: 0.5rem;
+            line-height: 1.4;
         }
         
         /* Toast Notifications */
@@ -861,12 +981,11 @@
         
         /* Print Styles */
         @media print {
-            header, .controls, .print-header, .tabs, .toast-container { display: none !important; }
+            header, .controls, .print-header, .tabs, .toast-container, .print-instructions { display: none !important; }
             body { background: white; }
             .container { padding: 0; max-width: 100%; }
-            .qr-grid { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
-            .qr-card { break-inside: avoid; border: 1px solid #000; padding: 0.5rem; }
-            .qr-card h4 { font-size: 0.7rem; }
+            .qr-print-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+            .qr-print-card { break-inside: avoid; border: 1px solid #000; }
         }
         
         /* Responsive */
@@ -879,6 +998,7 @@
             .stats { margin-left: 0; width: 100%; justify-content: center; }
             .form-row { grid-template-columns: 1fr; }
             .info-grid { grid-template-columns: 1fr; }
+            .qr-print-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -984,7 +1104,16 @@
                     <span>🖨️</span> Print All Labels
                 </button>
             </div>
-            <div id="qr-grid" class="qr-grid"></div>
+            
+            <div class="print-instructions">
+                <h3>ℹ️ Two-QR System Instructions</h3>
+                <p>
+                    <strong>ITEM QR (Blue):</strong> Attach to the demo equipment itself. Users scan this to CHECK OUT the item.<br>
+                    <strong>LOCATION QR (Green):</strong> Attach to the shelf/cabinet where the item is stored. Users scan this to RETURN the item — ensures equipment is put back in the correct spot.
+                </p>
+            </div>
+            
+            <div id="qr-print-grid" class="qr-print-grid"></div>
         </div>
     </div>
     
@@ -1033,10 +1162,11 @@
         
         let inventory = [];
         let currentDemo = null;
+        let currentAction = null; // 'checkout' or 'return'
         let isAdmin = false;
         const BASE_URL = window.location.href.split('?')[0];
         
-        // Category icons for visual appeal
+        // Category icons
         const categoryIcons = {
             'Mechanics': '⚙️',
             'E&M': '⚡',
@@ -1086,7 +1216,7 @@
             document.getElementById(tabId).classList.add('active');
             
             if (tabId === 'print-qr' && isAdmin) {
-                renderQRGrid();
+                renderQRPrintGrid();
             }
         }
         
@@ -1153,12 +1283,16 @@
                 populateFilters();
                 renderDemos();
                 
-                // Check for QR scan
+                // Check for QR scan with action
                 const params = new URLSearchParams(window.location.search);
                 const demoId = params.get('demo');
+                const action = params.get('action'); // 'checkout' or 'return'
+                
                 if (demoId) {
                     const demo = inventory.find(d => d.id === demoId);
-                    if (demo) openDemoModal(demo);
+                    if (demo) {
+                        openDemoModal(demo, action || 'view');
+                    }
                 }
             } catch (error) {
                 console.error('Error loading inventory:', error);
@@ -1255,7 +1389,7 @@
                 const isOverdue = demo.status === 'checked_out' && new Date(demo.expected_return) < new Date();
                 
                 return `
-                    <div class="demo-card" onclick="openDemoModal(inventory.find(d => d.id === '${demo.id}'))">
+                    <div class="demo-card" onclick="openDemoModal(inventory.find(d => d.id === '${demo.id}'), 'view')">
                         <div class="card-image">${icon}</div>
                         <div class="card-header">
                             <span class="card-id">${demo.id}</span>
@@ -1271,7 +1405,7 @@
                             ${demo.description ? `<p class="card-description">${demo.description}</p>` : ''}
                             ${demo.status === 'checked_out' ? `
                                 <div class="checkout-info ${isOverdue ? 'overdue' : ''}">
-                                    ${isOverdue ? '⚠️' : '📋'} ${demo.checked_out_by.split(' - ')[0]} · Due ${formatDate(demo.expected_return)}
+                                    ${isOverdue ? '⚠️' : '📋'} ${demo.checked_out_by.split(' - ')[0].split(' (')[0]} · Due ${formatDate(demo.expected_return)}
                                     ${isOverdue ? ' (OVERDUE)' : ''}
                                 </div>
                             ` : ''}
@@ -1287,22 +1421,124 @@
             document.getElementById('checked-out-count').textContent = checkedOut;
         }
         
-        function openDemoModal(demo) {
+        function openDemoModal(demo, action) {
             currentDemo = demo;
+            currentAction = action;
             document.getElementById('modal-title').textContent = demo.name;
             
             const isAvailable = demo.status === 'available';
             const isOverdue = !isAvailable && new Date(demo.expected_return) < new Date();
             const icon = categoryIcons[demo.category] || categoryIcons['default'];
             
-            const qrSection = isAdmin ? `
-                <div class="modal-section qr-container">
-                    <div id="modal-qr"></div>
-                    <p class="qr-hint">Scan to access this demo directly</p>
-                </div>
-            ` : '';
+            // Determine what banner and actions to show based on QR scan type
+            let actionBanner = '';
+            let actionButtons = '';
+            
+            if (action === 'checkout') {
+                // Scanned the ITEM QR - for checking out
+                if (isAvailable) {
+                    actionBanner = `
+                        <div class="action-banner checkout">
+                            <span class="action-banner-icon">📤</span>
+                            <div class="action-banner-text">
+                                <h3>Check Out This Item</h3>
+                                <p>You scanned the item QR. Fill out the form below to check it out.</p>
+                            </div>
+                        </div>
+                    `;
+                    actionButtons = `
+                        <button class="btn btn-info" id="checkout-btn" onclick="handleCheckout()">📤 Check Out Item</button>
+                        <button class="btn btn-secondary" onclick="closeModal('demo-modal')">Cancel</button>
+                    `;
+                } else {
+                    actionBanner = `
+                        <div class="action-banner checkout" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #f59e0b;">
+                            <span class="action-banner-icon">⚠️</span>
+                            <div class="action-banner-text">
+                                <h3>Item Already Checked Out</h3>
+                                <p>This item is currently with ${demo.checked_out_by.split(' - ')[0].split(' (')[0]}. Due back ${formatDate(demo.expected_return)}.</p>
+                            </div>
+                        </div>
+                    `;
+                    actionButtons = `
+                        <button class="btn btn-secondary" onclick="closeModal('demo-modal')">Close</button>
+                    `;
+                }
+            } else if (action === 'return') {
+                // Scanned the LOCATION QR - for returning
+                if (!isAvailable) {
+                    actionBanner = `
+                        <div class="action-banner return">
+                            <span class="action-banner-icon">📥</span>
+                            <div class="action-banner-text">
+                                <h3>Return This Item</h3>
+                                <p>You scanned the location QR at ${demo.location}. Confirm return below.</p>
+                            </div>
+                        </div>
+                    `;
+                    actionButtons = `
+                        <button class="btn btn-success" onclick="handleReturn()">✓ Confirm Return</button>
+                        <button class="btn btn-secondary" onclick="closeModal('demo-modal')">Cancel</button>
+                    `;
+                } else {
+                    actionBanner = `
+                        <div class="action-banner return">
+                            <span class="action-banner-icon">✅</span>
+                            <div class="action-banner-text">
+                                <h3>Item Already Available</h3>
+                                <p>This item is already in its location and available for checkout.</p>
+                            </div>
+                        </div>
+                    `;
+                    actionButtons = `
+                        <button class="btn btn-secondary" onclick="closeModal('demo-modal')">Close</button>
+                    `;
+                }
+            } else {
+                // Normal view (clicked from catalog)
+                if (isAvailable) {
+                    actionButtons = `
+                        <button class="btn btn-info" id="checkout-btn" onclick="handleCheckout()">📤 Check Out</button>
+                        <button class="btn btn-secondary" onclick="closeModal('demo-modal')">Close</button>
+                    `;
+                } else {
+                    // Only admin can return from normal view
+                    if (isAdmin) {
+                        actionButtons = `
+                            <button class="btn btn-success" onclick="handleReturn()">✓ Mark Returned (Admin)</button>
+                            <button class="btn btn-secondary" onclick="closeModal('demo-modal')">Close</button>
+                        `;
+                    } else {
+                        actionButtons = `
+                            <button class="btn btn-secondary" style="flex:none; padding:0.875rem 2rem;" onclick="closeModal('demo-modal')">Close</button>
+                        `;
+                    }
+                }
+            }
+            
+            // Build modal content
+            let checkoutInfo = '';
+            if (!isAvailable) {
+                checkoutInfo = `
+                    <div class="modal-section">
+                        <h3>Currently Checked Out</h3>
+                        <div class="checkout-info ${isOverdue ? 'overdue' : ''}" style="margin-top:0.5rem;">
+                            <div>
+                                <strong>${demo.checked_out_by}</strong><br>
+                                <small>Since: ${formatDate(demo.checked_out_date)}</small><br>
+                                <small>Due: ${formatDate(demo.expected_return)}${isOverdue ? ' <span class="overdue-badge">OVERDUE</span>' : ''}</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Only show form for checkout action when item is available
+            const showCheckoutForm = (action === 'checkout' && isAvailable) || (action === 'view' && isAvailable);
             
             document.getElementById('modal-body').innerHTML = `
+                ${actionBanner}
+                
                 <div class="info-grid">
                     <div class="modal-section">
                         <h3>Demo ID</h3>
@@ -1329,66 +1565,49 @@
                         <p>${demo.description}</p>
                     </div>
                 ` : ''}
-                ${!isAvailable ? `
-                    <div class="modal-section">
-                        <h3>Checkout Info</h3>
-                        <div class="checkout-info ${isOverdue ? 'overdue' : ''}" style="margin-top:0;">
-                            <div>
-                                <strong>${demo.checked_out_by}</strong><br>
-                                <small>Checked out: ${formatDate(demo.checked_out_date)}</small><br>
-                                <small>Due: ${formatDate(demo.expected_return)} ${isOverdue ? '<span class="overdue-badge">OVERDUE</span>' : ''}</small>
+                ${checkoutInfo}
+                
+                ${showCheckoutForm ? `
+                    <div class="form-section" id="checkout-form">
+                        <h4>📋 Checkout Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Name <span class="required">*</span></label>
+                                <input type="text" id="checkout-name" placeholder="Dr. Smith">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="checkout-email" placeholder="smith@baylor.edu">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Return Date <span class="required">*</span></label>
+                                <input type="date" id="checkout-return">
+                            </div>
+                            <div class="form-group">
+                                <label>Course / Purpose</label>
+                                <input type="text" id="checkout-purpose" placeholder="PHY 1420">
                             </div>
                         </div>
                     </div>
                 ` : ''}
-                ${qrSection}
-                
-                <div class="form-section" id="checkout-form">
-                    <h4>📋 Checkout Information</h4>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Your Name <span class="required">*</span></label>
-                            <input type="text" id="checkout-name" placeholder="Dr. Smith">
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" id="checkout-email" placeholder="smith@baylor.edu">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Return Date <span class="required">*</span></label>
-                            <input type="date" id="checkout-return">
-                        </div>
-                        <div class="form-group">
-                            <label>Course / Purpose</label>
-                            <input type="text" id="checkout-purpose" placeholder="PHY 1420">
-                        </div>
-                    </div>
-                </div>
                 
                 <div class="action-buttons">
-                    ${isAvailable ? `
-                        <button class="btn btn-primary" id="checkout-btn" onclick="handleCheckout()">📋 Check Out</button>
-                    ` : `
-                        <button class="btn btn-warning" onclick="handleReturn()">↩️ Return Item</button>
-                    `}
-                    <button class="btn btn-secondary" onclick="closeModal('demo-modal')">Close</button>
+                    ${actionButtons}
                 </div>
             `;
             
-            // Generate QR for admin
-            if (isAdmin) {
+            // Auto-show form if checkout action
+            if (action === 'checkout' && isAvailable) {
                 setTimeout(() => {
-                    const qrContainer = document.getElementById('modal-qr');
-                    if (qrContainer) {
-                        new QRCode(qrContainer, {
-                            text: `${BASE_URL}?demo=${demo.id}`,
-                            width: 140,
-                            height: 140,
-                            colorDark: '#154734',
-                            colorLight: '#ffffff'
-                        });
+                    const form = document.getElementById('checkout-form');
+                    if (form) {
+                        form.classList.add('active');
+                        const nextWeek = new Date();
+                        nextWeek.setDate(nextWeek.getDate() + 7);
+                        document.getElementById('checkout-return').value = nextWeek.toISOString().split('T')[0];
+                        document.getElementById('checkout-name').focus();
                     }
                 }, 100);
             }
@@ -1403,7 +1622,6 @@
             if (!form.classList.contains('active')) {
                 form.classList.add('active');
                 btn.innerHTML = '✓ Confirm Checkout';
-                // Set default return date
                 const nextWeek = new Date();
                 nextWeek.setDate(nextWeek.getDate() + 7);
                 document.getElementById('checkout-return').value = nextWeek.toISOString().split('T')[0];
@@ -1436,6 +1654,8 @@
         
         function handleReturn() {
             const demo = inventory.find(d => d.id === currentDemo.id);
+            const borrower = demo.checked_out_by.split(' - ')[0].split(' (')[0];
+            
             demo.status = 'available';
             demo.checked_out_by = '';
             demo.checked_out_date = '';
@@ -1444,7 +1664,7 @@
             closeModal('demo-modal');
             renderDemos();
             renderCheckoutLog();
-            showToast('success', 'Returned!', `${demo.name} is now available`);
+            showToast('success', 'Returned!', `${demo.name} is now available at ${demo.location}`);
         }
         
         function renderCheckoutLog() {
@@ -1499,27 +1719,57 @@
             showToast('success', 'Returned', `${demo.name} marked as returned`);
         }
         
-        function renderQRGrid() {
-            const grid = document.getElementById('qr-grid');
-            grid.innerHTML = inventory.map(demo => `
-                <div class="qr-card">
-                    <div id="qr-${demo.id.replace(/[^a-zA-Z0-9]/g, '_')}"></div>
-                    <h4>${demo.name}</h4>
-                    <div class="qr-id">${demo.id}</div>
-                    <div class="qr-location">📍 ${demo.location}</div>
-                </div>
-            `).join('');
+        function renderQRPrintGrid() {
+            const grid = document.getElementById('qr-print-grid');
+            grid.innerHTML = inventory.map(demo => {
+                const safeId = demo.id.replace(/[^a-zA-Z0-9]/g, '_');
+                return `
+                    <div class="qr-print-card">
+                        <div class="qr-print-card-header">
+                            <h4>${demo.name}</h4>
+                            <p>${demo.id} · ${demo.location}</p>
+                        </div>
+                        <div class="qr-print-card-body">
+                            <div class="qr-print-item item-qr">
+                                <span class="qr-label item">📤 ITEM QR</span>
+                                <div id="qr-item-${safeId}"></div>
+                                <p class="qr-print-hint">Attach to the<br>equipment itself</p>
+                            </div>
+                            <div class="qr-print-item location-qr">
+                                <span class="qr-label location">📥 LOCATION QR</span>
+                                <div id="qr-loc-${safeId}"></div>
+                                <p class="qr-print-hint">Attach to shelf at<br>${demo.location}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
             
             // Generate QR codes
             setTimeout(() => {
                 inventory.forEach(demo => {
-                    const container = document.getElementById(`qr-${demo.id.replace(/[^a-zA-Z0-9]/g, '_')}`);
-                    if (container && !container.querySelector('canvas')) {
-                        new QRCode(container, {
-                            text: `${BASE_URL}?demo=${demo.id}`,
-                            width: 100,
-                            height: 100,
-                            colorDark: '#154734',
+                    const safeId = demo.id.replace(/[^a-zA-Z0-9]/g, '_');
+                    
+                    // Item QR (for checkout)
+                    const itemContainer = document.getElementById(`qr-item-${safeId}`);
+                    if (itemContainer && !itemContainer.querySelector('canvas')) {
+                        new QRCode(itemContainer, {
+                            text: `${BASE_URL}?demo=${demo.id}&action=checkout`,
+                            width: 90,
+                            height: 90,
+                            colorDark: '#3b82f6',
+                            colorLight: '#ffffff'
+                        });
+                    }
+                    
+                    // Location QR (for return)
+                    const locContainer = document.getElementById(`qr-loc-${safeId}`);
+                    if (locContainer && !locContainer.querySelector('canvas')) {
+                        new QRCode(locContainer, {
+                            text: `${BASE_URL}?demo=${demo.id}&action=return`,
+                            width: 90,
+                            height: 90,
+                            colorDark: '#22c55e',
                             colorLight: '#ffffff'
                         });
                     }
@@ -1557,8 +1807,10 @@
             document.getElementById(id).classList.remove('active');
             if (id === 'demo-modal') {
                 currentDemo = null;
+                currentAction = null;
                 const params = new URLSearchParams(window.location.search);
                 params.delete('demo');
+                params.delete('action');
                 history.replaceState(null, '', params.toString() ? `${BASE_URL}?${params}` : BASE_URL);
             }
         }
