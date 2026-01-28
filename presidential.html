@@ -1598,8 +1598,8 @@ async function loadCSV(){
           const margin = toNum(row[mKey]);
           if (!isFinite(margin)) continue;
 
-          const d = 50 - (margin/2); // Poll_Margin is R minus D (R+D=0 => D leads)
-          const r = 50 + (margin/2);
+          const d = 50 + (margin/2); // Poll_Margin is D minus R
+          const r = 50 - (margin/2);
 
           const err = toNum(row[eKey]);
           // Use historical error magnitude as a rough sigma proxy; floor prevents overconfidence.
